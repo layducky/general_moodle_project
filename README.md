@@ -1,66 +1,66 @@
-# Moodle AI Platform - Tích hợp AI vào Hệ thống Quản lý Học tập
+# Moodle AI Platform - AI-Integrated Learning Management System
 
-## Tổng quan Dự án
+## Project Overview
 
-Dự án xây dựng nền tảng Moodle LMS tích hợp AI, triển khai trên AWS với kiến trúc microservices, CI/CD pipeline tự động và hệ thống giám sát metrics.
+This project builds a Moodle LMS platform integrated with AI, deployed on AWS with microservices architecture, automated CI/CD pipeline, and metrics monitoring system.
 
-![Architecture Diagram](Moodle_LMS.drawio.png)
+![Architecture Diagram](./Moodle_LMS.drawio.png)
 
-## Kiến trúc Hệ thống
+## System Architecture
 
 ### **CI/CD Pipeline**
-- **Dev Computer** → Push code lên **GitHub**
-- **GitHub Actions** tự động build và tạo Docker images
-- **Docker Hub** lưu trữ images
-- Server tự động pull images mới và rebuild containers
+- **Dev Computer** → Push code to **GitHub**
+- **GitHub Actions** automatically builds and creates Docker images
+- **Docker Hub** stores images
+- Servers automatically pull new images and rebuild containers
 
 ### **Server 1: AWS Moodle Server**
-- **Moodle App** (Port 80/443): Ứng dụng LMS chính, tích hợp AI features
-- **MariaDB** (Port 3306): Database lưu trữ dữ liệu
-- Moodle gửi request đến Kong Gateway qua endpoint `/api/generate`
+- **Moodle App** (Port 80/443): Main LMS application with integrated AI features
+- **MariaDB** (Port 3306): Data storage database
+- Moodle sends requests to Kong Gateway via `/api/generate` endpoint
 
 ### **Server 2: AWS Gateway & Metric Server**
 - **Kong AI API Gateway** (Port 8000/8001): 
-  - Route và quản lý requests từ Moodle đến Ollama AI
-  - Xử lý authentication, rate limiting, logging
+  - Routes and manages requests from Moodle to Ollama Exporter (AI proxy)
+  - Handles authentication, rate limiting, logging
   - Database: PostgreSQL
-- **Prometheus** (Port 9090): Thu thập và lưu trữ metrics
-- **Grafana** (Port 3000): Dashboard trực quan hóa metrics và monitoring
+- **Prometheus** (Port 9090): Collects and stores metrics
+- **Grafana** (Port 3000): Dashboard for metrics visualization and monitoring
 
 ### **Server 3: AWS Ollama AI Server**
-- **Ollama AI** (Port 11434): Chạy AI models (qwen2.5-coder:1.5b, v.v.)
-- **Ollama Exporter** (Port 9178): Export metrics để Prometheus thu thập
+- **Ollama AI** (Port 11434): Runs AI models (qwen2.5-coder:1.5b, etc.)
+- **Ollama Exporter** (Port 9178): Exports AI metrics for Prometheus collection and acts as a proxy for Ollama AI
 
 ## Repositories
 
 ### 1. [KongGateway](https://github.com/layducky/KongGateway)
-**Chức năng**: Khởi động Kong AI API Gateway & Ollama AI Server
+**Function**: Launch Kong AI API Gateway & Ollama AI Server
 
-**Bao gồm**:
-- Kong Gateway với AI plugins
-- Ollama AI Server và models
+**Includes**:
+- Kong Gateway with AI plugins
+- Ollama AI Server and models
 - Prometheus & Grafana monitoring
 - Docker Compose configurations
 
 ### 2. [moodle-k8s-project](https://github.com/nguyendangcuong201004/moodle-k8s-project)
-**Chức năng**: Source code và Docker packaging của Moodle
+**Function**: Moodle source code and Docker packaging
 
-**Bao gồm**:
-- Source code Moodle tích hợp AI features
-- Dockerfile và docker-compose
-- CI/CD workflows với GitHub Actions
+**Includes**:
+- Moodle source code with integrated AI features
+- Dockerfile and docker-compose
+- CI/CD workflows with GitHub Actions
 - MariaDB configuration
 
 ### 3. [moodle-k8s-infra](https://github.com/nguyendangcuong201004/moodle-k8s-infra)
-**Chức năng**: Infrastructure as Code (IaC) với Terraform & Kubernetes
+**Function**: Infrastructure as Code (IaC) with Terraform & Kubernetes
 
-**Bao gồm**:
-- Terraform scripts provision AWS infrastructure
+**Includes**:
+- Terraform scripts for AWS infrastructure provisioning
 - Kubernetes manifests (deployments, services)
-- Network và security configurations
-- AWS resources: VPC, EKS, RDS, Load Balancers
+- Network and security configurations
+- AWS resources: VPC, EKS, Load Balancers
 
-## Luồng Hoạt động
+## Workflow
 
 ### Development & CI/CD Flow
 ```
@@ -97,7 +97,7 @@ Kong Gateway → Metrics → Prometheus (9090) → Query Data → Grafana (3000)
 Ollama Exporter → Metrics → ←
 ```
 
-## Công nghệ Sử dụng
+## Technology Stack
 
 - **Frontend/Backend**: Moodle LMS (PHP)
 - **Database**: MariaDB
@@ -107,9 +107,9 @@ Ollama Exporter → Metrics → ←
 - **Container**: Docker & Docker Compose
 - **Orchestration**: Kubernetes (K8s)
 - **Infrastructure**: Terraform
-- **Cloud Provider**: AWS (VPC, EKS, EC2, RDS)
+- **Cloud Provider**: AWS (VPC, EKS, EC2)
 - **CI/CD**: GitHub Actions
 
 ---
 
-**Dự án này thể hiện**: Kiến trúc microservices, DevOps practices (CI/CD, IaC), Cloud deployment, AI integration, và Monitoring & Observability.
+**This project demonstrates**: Microservices architecture, DevOps practices (CI/CD, IaC), Cloud deployment, AI integration, and Monitoring & Observability.
