@@ -33,7 +33,9 @@ This project builds a Moodle LMS platform integrated with AI, deployed on AWS wi
 
 ## Repositories
 
-### 1. [KongGateway](https://github.com/layducky/KongGateway)
+### 1. KongGateway
+https://github.com/layducky/KongGateway
+
 **Function**: Launch Kong AI API Gateway & Ollama AI Server
 
 **Includes**:
@@ -42,7 +44,9 @@ This project builds a Moodle LMS platform integrated with AI, deployed on AWS wi
 - Prometheus & Grafana monitoring
 - Docker Compose configurations
 
-### 2. [moodle-k8s-project](https://github.com/nguyendangcuong201004/moodle-k8s-project)
+### 2. moodle-k8s-project
+https://github.com/nguyendangcuong201004/moodle-k8s-project
+
 **Function**: Moodle source code and Docker packaging
 
 **Includes**:
@@ -51,7 +55,9 @@ This project builds a Moodle LMS platform integrated with AI, deployed on AWS wi
 - CI/CD workflows with GitHub Actions
 - MariaDB configuration
 
-### 3. [moodle-k8s-infra](https://github.com/nguyendangcuong201004/moodle-k8s-infra)
+### 3. moodle-k8s-infra
+https://github.com/nguyendangcuong201004/moodle-k8s-infra
+
 **Function**: Infrastructure as Code (IaC) with Terraform & Kubernetes
 
 **Includes**:
