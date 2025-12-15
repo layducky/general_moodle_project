@@ -4,7 +4,7 @@
 
 Dự án xây dựng nền tảng Moodle LMS tích hợp AI, triển khai trên AWS với kiến trúc microservices, CI/CD pipeline tự động và hệ thống giám sát metrics.
 
-![Architecture Diagram](architecture-diagram.png)
+![Architecture Diagram](Moodle_LMS.drawio.png)
 
 ## Kiến trúc Hệ thống
 
